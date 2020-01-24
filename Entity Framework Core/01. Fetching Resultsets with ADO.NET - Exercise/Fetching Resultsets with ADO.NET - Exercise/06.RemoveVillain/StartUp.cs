@@ -65,7 +65,7 @@
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
