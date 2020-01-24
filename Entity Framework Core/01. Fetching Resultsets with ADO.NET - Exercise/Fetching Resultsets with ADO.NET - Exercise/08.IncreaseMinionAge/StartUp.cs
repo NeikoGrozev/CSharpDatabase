@@ -14,11 +14,11 @@
                 .Select(int.Parse)
                 .ToList();
 
-            string conectionString = "Server=NEIKO\\SQLEXPRESS;" +
+            string connectionString = "Server=NEIKO\\SQLEXPRESS;" +
                                      "Database=MinionsDb;" +
-                                     "Integrated SEcurity=true";
+                                     "Integrated Security=true";
 
-            SqlConnection conection = new SqlConnection(conectionString);
+            SqlConnection conection = new SqlConnection(connectionString);
             conection.Open();
 
             try
