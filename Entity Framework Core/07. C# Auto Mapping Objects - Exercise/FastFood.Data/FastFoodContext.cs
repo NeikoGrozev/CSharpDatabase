@@ -37,9 +37,6 @@
 
             builder.Entity<Item>()
                 .HasAlternateKey(i => i.Name);
-
-            builder.Entity<Category>()
-               .HasAlternateKey(c => c.Name);
         }
     }
 }

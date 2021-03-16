@@ -1,10 +1,8 @@
-﻿using CarDealer.Models;
-using JetBrains.Annotations;
-using Microsoft.EntityFrameworkCore;
-using System;
-
-namespace CarDealer.Data
+﻿namespace CarDealer.Data
 {
+    using CarDealer.Models;
+    using Microsoft.EntityFrameworkCore;
+
     public class CarDealerContext : DbContext
     {
         public CarDealerContext()

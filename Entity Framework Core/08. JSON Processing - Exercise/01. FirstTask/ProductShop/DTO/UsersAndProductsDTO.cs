@@ -9,6 +9,6 @@
         public int UsersCount { get; set; }
 
         [JsonProperty("users")]
-        public ICollection<UsersDTO> Users { get; set; }
+        public IEnumerable<UserDTO> Users { get; set; }
     }
 }

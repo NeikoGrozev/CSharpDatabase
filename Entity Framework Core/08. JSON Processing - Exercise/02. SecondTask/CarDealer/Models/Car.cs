@@ -1,11 +1,10 @@
 ﻿namespace CarDealer.Models
 {
-    using System;
     using System.Collections.Generic;
 
     public class Car
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
         public string Make { get; set; }
 

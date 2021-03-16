@@ -10,6 +10,6 @@
 
         public long TravelledDistance { get; set; }
 
-        public int[] PartsId { get; set; }
+        public IEnumerable<int> PartsId { get; set; }
     }
 }

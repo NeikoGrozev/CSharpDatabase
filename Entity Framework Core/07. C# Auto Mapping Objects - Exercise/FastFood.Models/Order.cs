@@ -9,11 +9,6 @@ namespace FastFood.Models
 
     public class Order
 	{
-		public Order()
-		{
-			this.OrderItems = new List<OrderItem>();
-		}
-
 		public int Id { get; set; }
 
 		[Required]
