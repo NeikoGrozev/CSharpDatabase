@@ -3,8 +3,8 @@
     public enum LabelType
     {
         Priority,
-        CSharpAdvanced,
-        JavaAdvanced,
+        CSharpAdvanced, 
+        JavaAdvanced, 
         EntityFramework,
         Hibernate
     }

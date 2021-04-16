@@ -1,16 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace TeisterMask.DataProcessor.ImportDto
+﻿namespace TeisterMask.DataProcessor.ImportDto
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ImportEmployeeDTO
     {
         [Required]
         [StringLength(40, MinimumLength = 3)]
-        //[RegularExpression(@"^[A-Za-z\d]$")]
+        [RegularExpression(@"^[A-Za-z\d]+$")]
         public string Username { get; set; }
 
         [Required]

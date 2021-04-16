@@ -2,20 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
+
     using System.ComponentModel.DataAnnotations;
-
-    using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
-
-    using Data;
-    using System.Xml.Serialization;
-    using TeisterMask.DataProcessor.ImportDto;
-    using System.IO;
-    using System.Text;
-    using TeisterMask.Data.Models;
     using System.Globalization;
-    using TeisterMask.Data.Models.Enums;
-    using Newtonsoft.Json;
+    using System.IO;
     using System.Linq;
+    using System.Text;
+    using System.Xml.Serialization;
+    using Data;
+    using Newtonsoft.Json;
+    using TeisterMask.Data.Models;
+    using TeisterMask.Data.Models.Enums;
+    using TeisterMask.DataProcessor.ImportDto;
+    using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
     public class Deserializer
     {
@@ -150,7 +149,6 @@
 
             var sb = new StringBuilder();
             var employees = new List<Employee>();
-            var tasks = context.Tasks.ToList();
 
             foreach (var employeeDTO in employeeDTOs)
             {
@@ -169,7 +167,7 @@
 
                 foreach (var taskDTO in employeeDTO.Tasks.Distinct())
                 {
-                    var currentTask = tasks.FirstOrDefault(x => x.Id == taskDTO);
+                    var currentTask = context.Tasks.FirstOrDefault(x => x.Id == taskDTO);
 
                     if (currentTask == null)
                     {

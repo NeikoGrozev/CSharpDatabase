@@ -1,13 +1,15 @@
 ﻿namespace TeisterMask.DataProcessor.ImportDto
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
     using System.Xml.Serialization;
+    using TeisterMask.Data.Models.Enums;
 
     [XmlType("Task")]
     public class ImportProjectTaskDTO
     {
         [Required]
-        [StringLength(40, MinimumLength = 2)]
+        [StringLength(40, MinimumLength = 3)]
         [XmlElement("Name")]
         public string Name { get; set; }
 

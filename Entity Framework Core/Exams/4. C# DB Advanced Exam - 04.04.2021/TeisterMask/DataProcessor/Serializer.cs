@@ -1,15 +1,12 @@
 ﻿namespace TeisterMask.DataProcessor
 {
-    using System;
-    using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Xml;
-    using System.Xml.Linq;
-    using System.Xml.Serialization;
     using Data;
     using Newtonsoft.Json;
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using System.Xml.Serialization;
     using TeisterMask.DataProcessor.ExportDto;
     using Formatting = Newtonsoft.Json.Formatting;
 
@@ -18,7 +15,8 @@
         public static string ExportProjectWithTheirTasks(TeisterMaskContext context)
         {
             var projects = context.Projects
-                 .Where(p => p.Tasks.Count() > 0)
+                 .ToArray()
+                 .Where(x => x.Tasks.Count() > 0)
                  .Select(p => new ExportProjectDTO()
                  {
                      TasksCount = p.Tasks.Count().ToString(),
@@ -44,29 +42,29 @@
 
             xmlSerializer.Serialize(new Utf8StringWriter(sb), projects, namespaces);
 
-            //sb = sb.Replace("utf-16", "utf-8");
-
             return sb.ToString().Trim();
         }
 
         public static string ExportMostBusiestEmployees(TeisterMaskContext context, DateTime date)
         {
             var employees = context.Employees
+                .ToArray()
                 .Where(x => x.EmployeesTasks.Any(et => et.Task.OpenDate >= date))
                 .Select(em => new ExportEmployeeDTO()
                 {
                     Username = em.Username,
                     Tasks = em.EmployeesTasks
+                    .ToArray()
                     .Where(x => x.Task.OpenDate >= date)
                     .OrderByDescending(x => x.Task.DueDate)
                     .ThenBy(x => x.Task.Name)
-                    .Select(emp => new ExportEmployeeTaskDTO()
+                    .Select(t => new ExportEmployeeTaskDTO()
                     {
-                        TaskName = emp.Task.Name,
-                        OpenDate = emp.Task.OpenDate.ToString("d", CultureInfo.InvariantCulture),
-                        DueDate = emp.Task.DueDate.ToString("d", CultureInfo.InvariantCulture),
-                        ExecutionType = emp.Task.ExecutionType.ToString(),
-                        LabelType = emp.Task.LabelType.ToString(),
+                        TaskName = t.Task.Name,
+                        OpenDate = t.Task.OpenDate.ToString("d", CultureInfo.InvariantCulture),
+                        DueDate = t.Task.DueDate.ToString("d", CultureInfo.InvariantCulture),
+                        ExecutionType = t.Task.ExecutionType.ToString(),
+                        LabelType = t.Task.LabelType.ToString(),
                     })
 
                     .ToArray()
@@ -79,15 +77,6 @@
             var json = JsonConvert.SerializeObject(employees, Formatting.Indented);
 
             return json;
-        }
-
-        public class Utf8StringWriter : StringWriter
-        {
-            public Utf8StringWriter(StringBuilder sb)
-                : base(sb)
-            {
-            }
-            public override Encoding Encoding => Encoding.UTF8;
         }
     }
 }

@@ -11,7 +11,7 @@
         [XmlElement("ProjectName")]
         public string ProjectName { get; set; }
 
-        [XmlElement("HasEndDate")]
+        [XmlElement]
         public string HasEndDate { get; set; }
 
         [XmlArray("Tasks")]
